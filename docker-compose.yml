@@ -30,3 +30,14 @@ services:
       - SPARK_SSL_ENABLED=no
     depends_on:
       - spark-master
+  hadoop-namenode:
+    image: github.com/laiyewhon/spark-playground/hadoop:0.0.1-SNAPSHOT
+    build: hadoop
+    command: hdfs namenode -fs hdfs://hadoop-namenode:8020
+    ports:
+      - 9870:9870
+  hadoop-datanode:
+    image: github.com/laiyewhon/spark-playground/hadoop:0.0.1-SNAPSHOT
+    depends_on:
+      - hadoop-namenode
+    command: hdfs datanode -fs hdfs://hadoop-namenode:8020
