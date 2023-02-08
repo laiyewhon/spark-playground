@@ -1,10 +1,8 @@
 FROM ubuntu:lunar
 
 RUN apt update -y
-RUN apt install -y default-jre openssh-server curl
+RUN apt install -y openjdk-8-jdk curl
 RUN apt-get clean
-
-RUN service ssh start
 
 RUN adduser hadoop
 RUN mkdir /hadoop
@@ -17,7 +15,7 @@ RUN tar -xzf /tmp/hadoop-3.3.4.tar.gz
 RUN ln -s /hadoop/hadoop-3.3.4 hadoop
 RUN rm -f /tmp/hadoop-3.3.4.tar.gz
 
-ENV JAVA_HOME=/usr/lib/jvm/default-java
+ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 ENV HADOOP_HOME=/hadoop/hadoop
 ENV PATH=${HADOOP_HOME}/bin:${PATH}
 
